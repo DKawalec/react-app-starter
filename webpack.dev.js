@@ -1,12 +1,29 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: './dist',
+    open: true,
+    port: 3000
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'React Starter',
+      template: './src/index.html'
+    }),
+    new webpack.HotModuleReplacementPlugin()
+  ],
   module: {
     rules: [
       {
@@ -43,12 +60,12 @@ module.exports = {
             }
           }
         ],
-      }
+      }, {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          'file-loader',
+        ],
+      },
     ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'React Starter',
-    }),
-  ]
+  }
 };

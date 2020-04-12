@@ -12,5 +12,5 @@ render(
       {routes}
     </Switch>
   </Router>,
-  document.getElementsByTagName('body')[0]
+  document.getElementById('app')
 );
