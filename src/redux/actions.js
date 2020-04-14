@@ -1,0 +1,1 @@
+export const NUM_UP = 'NUM_UP';

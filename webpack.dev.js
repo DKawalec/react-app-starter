@@ -13,6 +13,7 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './dist',
+    overlay: true,
     open: true,
     port: 3000
   },
@@ -47,7 +48,12 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           'style-loader',
-          'css-loader',
+          {
+            loader:'css-loader',
+            options: {
+              modules: true
+            }
+          },
           'sass-loader'
         ],
       }, {
